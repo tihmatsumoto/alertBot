@@ -1,0 +1,45 @@
+name: Check schedule
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  verification:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 10.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+        registry-url: 'https://registry.npmjs.org'
+
+    - name: Cache node_modules
+      uses: actions/cache@v2
+      with:
+        path: node_modules
+        key: dependency-cache-{{ hashFiles('package.json') }}
+        restore-keys: |
+          dependency-cache-
+    
+    - name: Install dependencies and verify Cypress
+      run: npm ci
+           npm run cypress:verify
+           npm run clean-reports
+
+    - name: Run tests
+      run: npm run test
+      env: 
+        EMAIL: ${{ secrets.EMAIL }}
+        PASS: ${{ secrets.PASS }}
+      
+    - name: Run bot
+      if: ${{failure()}}
+      run: node index.js
+      env:
+        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
