@@ -12,7 +12,7 @@ describe("Access to Consular", () => {
       if ($el.text() === "Procuração e substabelecimento para fins diversos") {
         cy.get("tr>td:nth-of-type(2)")
           .eq(index)
-          .should("have.text", "Indisponível. no momento, confira mais tarde");
+          .should("have.text", "Indisponível no momento, confira mais tarde");
       }
     });
   });
