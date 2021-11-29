@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "using telegram bots",
   "scripts": {
+    "cypress": "cypress open",
+    "test": "cypress run",
     "lint:fix": "prettier --write \"cypress/**/*.js\""
   },
   "author": "Marcia Matsumoto",
   "license": "ISC",
   "dependencies": {
+    "cypress": "^7.5.0",
     "dotenv": "^8.2.0",
     "node-telegram-bot-api": "^0.51.0"
   },

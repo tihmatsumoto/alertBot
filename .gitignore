@@ -14,3 +14,11 @@ node_modules/
 
 # vscode history directory
 .history
+
+# Cypress video and snapshot directories
+cypress/videos/
+cypress/screenshots/
+full_report.json
+mochawesome-report/
+report/
+cypress/downloads/
