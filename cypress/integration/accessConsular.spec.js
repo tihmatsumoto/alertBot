@@ -4,16 +4,9 @@ describe("Access to Consular", () => {
   });
 
   it("should check scheduling dates", () => {
-    cy.login(Cypress.env("email"), Cypress.env("pass"));
+    cy.login('Cypress.env("email")', Cypress.env("pass"));
     cy.wait(5000);
-    cy.get("a[href='/availability']").click();
-    cy.get(".table").should("be.visible");
-    cy.get("tr > td:nth-of-type(1)").each(($el, index, $list) => {
-      if ($el.text() === "Procuração e substabelecimento para fins diversos") {
-        cy.get("tr>td:nth-of-type(2)")
-          .eq(index)
-          .should("have.text", "Indisponível no momento, confira mais tarde");
-      }
-    });
+    cy.get(".row .col .btn-outline-primary").contains('Continuar').click();
+    cy.get(".alert-primary").should("have.text", "Não há horários disponíveis no momento. Tente novamente mais tarde!");
   });
 });
