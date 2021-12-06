@@ -5,8 +5,9 @@ describe("Access to Consular", () => {
 
   it("should check scheduling dates", () => {
     cy.login(Cypress.env("email"), Cypress.env("pass"));
-    cy.wait(5000);
+    cy.get(".container .title", { timeout: 10000 }).should('be.visble');
     cy.get(".row .col .btn-outline-primary").contains('Continuar').click();
+    cy.get(".container .title", { timeout: 10000 }).should('be.visble');
     cy.get(".alert-primary").should("have.text", "Não há horários disponíveis no momento. Tente novamente mais tarde!");
   });
 });

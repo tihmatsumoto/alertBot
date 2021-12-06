@@ -2,5 +2,5 @@
     "video": false,
     "chromeWebSecurity": false,
     "watchForFileChanges": false,
-    "pageLoadTimeout": 15000
+    "pageLoadTimeout": 25000
 }
